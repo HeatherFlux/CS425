@@ -23,7 +23,7 @@ $bodyID .= " id=\"$body\"";
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Von Steuben Cares</title>
+    <title>CS 425 App</title>
   </head>
 
   <!-- This is the section you will adjust the most. -->
@@ -31,12 +31,12 @@ $bodyID .= " id=\"$body\"";
     <div class="container">
 
       <!--  Jumbotron is the header that you see, you can change its color-->
-      <div class="jumbotron">
+      <div style="background:#02474d; color: #EEEEEE;!important" class="jumbotron">
          <!-- Title  -->
-         <h1 class="display-3">Von Steuben Cares</h1>
+         <h1 class="display-3">CS 425 App</h1>
          <!-- About Your App -->
-         <p class="lead">Von Steuben Cares is a website dedicated to providing students at the school an updated list of volunteer opportunities around campus.</p>
-         <p><a class="btn btn-lg btn-success" href="index.php" role="button">View Events</a></p>
+         <p class="lead">Small webapp for uploading products to a database.</p>
+         <p><a style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;"class="btn btn-lg btn-success" href="index.php" role="button">Home</a></p>
        </div>
 
 <!--  This is where the form starts-->
@@ -47,35 +47,35 @@ $bodyID .= " id=\"$body\"";
 
             <form>
             <div class="form-group">
-              <label for="event">Event Name</label>
+              <label for="event">Product</label>
               <input type="text" class="form-control" name="event"  placeholder="Enter Event Name">
             </div>
           </div>
 
           <div class="col-lg-6">
              <div class="form-group">
-              <label for="addr">Address</label>
+              <label for="addr">Product</label>
               <input type="text" class="form-control" name="addr" placeholder="Enter Address">
              </div>
            </div>
 
            <div class="col-lg-6">
               <div class="form-group">
-               <label for="date">Date</label>
+               <label for="date">Product</label>
                <input type="date" class="form-control" name="date" placeholder="Enter Date 00/00/00">
               </div>
             </div>
 
             <div class="col-lg-6">
                <div class="form-group">
-                <label for="time">Start Time</label>
+                <label for="time">Procut</label>
                 <input type="time" class="form-control" name="time" placeholder="Enter Time 00:00AM/PM">
                </div>
              </div>
 
         <div class="container">
           <div class="form-group">
-           <label for="detail">Details</label>
+           <label for="detail">Product</label>
            <input type="text" class="form-control" name="detail" placeholder="Enter Details">
           </div>
         </div>

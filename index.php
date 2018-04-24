@@ -25,7 +25,7 @@ $bodyID .= " id=\"$body\"";
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Von Steuben Cares</title>
+    <title>CS 425 App</title>
   </head>
 
   <!-- This is the section you will adjust the most. -->
@@ -33,12 +33,12 @@ $bodyID .= " id=\"$body\"";
     <div class="container">
 
       <!--  Jumbotron is the header that you see, you can change its color-->
-      <div class="jumbotron">
+      <div style="background:#02474d; color: #EEEEEE; !important" class="jumbotron">
          <!-- Title  -->
-         <h1 class="display-3">Von Steuben Cares</h1>
+         <h1 class="display-3">CS 425 App</h1>
          <!-- About Your App -->
-         <p class="lead">Von Steuben Cares is a website dedicated to providing students at the school an updated list of volunteer opportunities around campus.</p>
-         <p><a class="btn btn-lg btn-success" href="form.php" role="button">Post An Event</a></p>
+         <p class="lead">Small webapp for uploading products to a database.</p>
+         <p><a style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;"class="btn btn-lg btn-success" href="form.php" role="button">Upload a Product</a></p>
        </div>
 
        <!-- This is where you will populate your upcoming events. -->
