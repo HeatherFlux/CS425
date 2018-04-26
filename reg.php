@@ -46,21 +46,26 @@ $bodyID .= " id=\"$body\"";
           <div class="col-sm">
             <form class="form-signin" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST" action="addtodatabase.php" >
 
-              <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
+              <h1 class="h3 mb-3 font-weight-normal">Register</h1>
 
               <label for="inputEmail" class="sr-only">Email address</label>
               <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+
+              <label for="nameFirst" class="sr-only">First Name</label>
+              <input type="text" id="nameFirst" class="form-control" placeholder="First Name" required>
+
+              <label for="nameLast" class="sr-only">Last Name</label>
+              <input type="text" id="nameLast" class="form-control" placeholder="Last Name" required>
+
               <label for="inputPassword" class="sr-only">Password</label>
               <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
-              <div class="checkbox mb-3">
-                <label>
-                  <input type="checkbox" value="remember-me"> Remember me
-                </label>
-              </div>
+              <label for="inputPasswordC" class="sr-only">PasswordC</label>
+              <input type="password" id="inputPasswordC" class="form-control" placeholder="Confirm Password" required>
+              <br>
 
                 <button style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;" class="btn btn-lg btn-primary btn-block"; id="btlogin"; type="submit">Sign in</button>
-
+                <p>Have an Account? <a href="index.php">Login</a></p>
             </form>
           </div>
         <div class="col-sm">
