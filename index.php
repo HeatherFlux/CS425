@@ -1,18 +1,4 @@
-<?php
 
-$bodyID = "";
-if (isset($classes)){
-$bodyID .= " class=\"";
-foreach($classes as $class){
-    $bodyID .= "$class ";
-}
-$bodyID .= "\" ";
-}
-if (isset($body)) {
-$bodyID .= " id=\"$body\"";
-}
-
-?>
 
 <!doctype html>
 

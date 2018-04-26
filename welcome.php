@@ -40,6 +40,7 @@ $bodyID .= " id=\"$body\"";
          <!-- About Your App -->
          <p class="lead">Small webapp for uploading products to a database.</p>
        </div>
+       
        <div class="container" class="text-center">
          <div class="row">
            <h1 class="display-2">Welcome Back $USERNAME</h1>
@@ -55,29 +56,7 @@ $bodyID .= " id=\"$body\"";
         </div>
         <div class="col-sm"></div>
        <!-- This is where you will populate your upcoming events. -->
-       <div class="row marketing">
-         <?php
-           include "datadata.php";
-           $connect = new mysqli($host, $username, $password, $db_name);
-             if($connect != null){
-             }
-             else{
-               echo "failed to connect ";
-             }
-           $sqlQuery = "SELECT * FROM events";
-           $qry = $connect->query($sqlQuery);
 
-           while($row = $qry->fetch_assoc()){
-             echo "<div class=col-lg-6>
-               <h4>".$row["name"]."</h4>
-               <p>".$row["addr"]."</p>
-               <p>".$row["date"]."</p>
-               <p>".date('h:i:A',strtotime($row["time"]))."</p>
-               <p>".$row["details"]."</p>
-               </div>";
-           };
-         ?>
-        </div>
       </div>
 
     <!-- Optional JavaScript -->
@@ -91,3 +70,30 @@ $bodyID .= " id=\"$body\"";
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>
+
+
+
+
+<!--  <div class="row marketing">
+  <?php
+    include "datadata.php";
+    $connect = new mysqli($host, $username, $password, $db_name);
+      if($connect != null){
+      }
+      else{
+        echo "failed to connect ";
+      }
+    $sqlQuery = "SELECT * FROM events";
+    $qry = $connect->query($sqlQuery);
+
+    while($row = $qry->fetch_assoc()){
+      echo "<div class=col-lg-6>
+        <h4>".$row["name"]."</h4>
+        <p>".$row["addr"]."</p>
+        <p>".$row["date"]."</p>
+        <p>".date('h:i:A',strtotime($row["time"]))."</p>
+        <p>".$row["details"]."</p>
+        </div>";
+    };
+  ?>
+ </div>-->
