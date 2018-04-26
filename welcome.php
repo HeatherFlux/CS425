@@ -30,7 +30,7 @@ $bodyID .= " id=\"$body\"";
   </head>
 
   <!-- This is the section you will adjust the most. -->
-  <body>
+  <body class="text-center">
     <div class="container">
 
       <!--  Jumbotron is the header that you see, you can change its color-->
@@ -39,11 +39,23 @@ $bodyID .= " id=\"$body\"";
          <h1 class="display-3">CS 425 App</h1>
          <!-- About Your App -->
          <p class="lead">Small webapp for uploading products to a database.</p>
-         <p><a style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;"class="btn btn-lg btn-success" href="form.php" role="button">Upload a Product</a></p>
        </div>
-
+       <div class="container" class="text-center">
+         <div class="row">
+           <h1 class="display-2">Welcome Back $USERNAME</h1>
+         </div>
+       </div>
+       <div class="row">
+      <div class="col-sm"></div>
+       <div class="col-sm">
+         <div class="row marketing">
+           <p><a style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;"class="btn btn-lg btn-success" href="upForm.php" role="button">Upload a Product</a></p>
+           <p><a style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;"class="btn btn-lg btn-success" href="downForm.php" role="button">Purchase a Product</a></p>
+         </div>
+        </div>
+        <div class="col-sm"></div>
        <!-- This is where you will populate your upcoming events. -->
-       <div class=row marketing>
+       <div class="row marketing">
          <?php
            include "datadata.php";
            $connect = new mysqli($host, $username, $password, $db_name);

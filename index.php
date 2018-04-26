@@ -44,6 +44,7 @@ $bodyID .= " id=\"$body\"";
       <div class="row">
         <div class="col-sm"></div>
           <div class="col-sm">
+            <!-- Below form action needs to be changed based on the php script. -->
             <form class="form-signin" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST" action="addtodatabase.php" >
 
               <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
