@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>View Users</title>
+    <title>View Products</title>
 </head>
 
 <body class="text-center">
@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="table-scrol">
-        <h1 align="center">All the Users</h1>
+        <h1 align="center">All Current Products</h1>
         <div class="table-responsive">
             <!--this is used for responsive display in mobile and other devices-->
             <table class="table table-bordered table-hover table-striped" style="table-layout: fixed">
