@@ -101,7 +101,7 @@ if(isset($_POST['register']))
 
 
 //here query check whether the user already registered so can't register again.
-    $check_email_query="select * from customer WHERE email='$user_email'";
+    $check_email_query="select * from customer WHERE email='$email'";
     $run_query=mysqli_query($dbcon,$check_email_query);
 
     if(mysqli_num_rows($run_query)>0)
@@ -118,7 +118,7 @@ if(isset($_POST['register']))
     else{
       echo "Error: Unable to connect to MySQL." . PHP_EOL;
       printf("Connect failed: %s\n", mysqli_errno($dbcon));
-      echo "Debugging error: " . mysqli_error($insert_user) . PHP_EOL;
+     
       exit;
     }
 
