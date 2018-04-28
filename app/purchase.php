@@ -29,20 +29,23 @@ if(!$_SESSION['email'])
     <!-- NAVBAR -->
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Welcome Back <?php echo $_SESSION['fname'];?></a>
+        <a class="navbar-brand" href="#">Welcome <?php echo $_SESSION['name'];?></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
+              <a class="nav-link" href="welcome.php">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
               <a class="nav-link" href="purchase.php">Purchase</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="addtoproducts.php">Add</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="changesettings.php">User Settings</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="logout.php">Logout</a>
@@ -64,7 +67,7 @@ if(!$_SESSION['email'])
         <p class="lead">Small webapp for uploading products to a database.</p>
       </div>
 
-	
+
     <div class="table-scrol">
         <h1 align="center">All Current Products</h1>
         <div class="table-responsive">
@@ -85,9 +88,9 @@ if(!$_SESSION['email'])
                         <th>Product Image</th>
 						<th>Amount of Products Purchasing</th>
 						<th></th>
-                        
+
                     </tr>
-                </thead>               
+                </thead>
 				<?php
                 include("db_connection.php");
 
@@ -132,10 +135,10 @@ if(!$_SESSION['email'])
 						<td><?php echo $product_description;  ?></td>
 						<td><?php echo $product_image_link;  ?></td>
 						<td><input class="form-control mr-sm-2" type="search" placeholder="Quantity" aria-label="Quantity"></td>
-						<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Purchase</button></a></td> 
-					</tr><?php 
+						<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Purchase</button></a></td>
+					</tr><?php
 
-					
+
 				} ?>
             </table>
     </div>
