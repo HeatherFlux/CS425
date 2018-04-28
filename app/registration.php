@@ -60,7 +60,7 @@
 </html>
 
 <?php
-//hi, hi
+
 
 // FIX ME, This section needs to be filled
 

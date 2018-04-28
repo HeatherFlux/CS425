@@ -39,7 +39,7 @@
         </thead>
 
         <?php
-        include("db_conection.php");
+        include("db_connection.php");
         $view_users_query="select * from 425.users";//select query for viewing users.
         $run=mysqli_query($dbcon,$view_users_query);//here run the sql query.
 
