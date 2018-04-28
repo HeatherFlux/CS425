@@ -43,6 +43,9 @@ if(!$_SESSION['email'])
               <a class="nav-link" href="addtoproducts.php">Add</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="changesettings.php">User Settings</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="logout.php">Logout</a>
             </li>
           </ul>
