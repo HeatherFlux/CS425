@@ -71,15 +71,13 @@ if(isset($_POST['login']))
     $user_email=$_POST['email'];
     $user_pass=$_POST['pass'];
 
-    $check_user="select * from users WHERE user_email='$user_email'AND user_pass='$user_pass'";
+    $check_user="select * from customer WHERE email='$user_email' AND account_password='$user_pass'";
 
     $run=mysqli_query($dbcon,$check_user);
 
     if(mysqli_num_rows($run))
     {
         echo "<script>window.open('welcome.php','_self')</script>";
-
-        $_SESSION['email']=$user_email;//here session is used and value of $user_email store in $_SESSION.
     }
     else
     {
@@ -87,13 +85,15 @@ if(isset($_POST['login']))
     }
     while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.
     {
-        $user_id=$row[0];
-        $first_name=$row[1];
-        $last_name=$row[4];
-        $_SESSION['fname']=$first_name;
-        $_SESSION['lname']=$last_name;
-        $_SESSION['id']=$user_id;
-
+      $_SESSION['name']=$row[1];
+      $_SESSION['email']=$row[2];
+      $_SESSION['phone_number']=$row[3];
+      $_SESSION['address']=$row[4];
+      $_SESSION['wallet']=$row[5];
+      $_SESSION['aName']=$row[6];
+      $_SESSION['aPass']=$row[7];
+      $_SESSION['pCount']=$row[8];
+      $_SESSION['cRegion']=$row[9];
     }
 
 }
