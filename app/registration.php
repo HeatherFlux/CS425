@@ -104,8 +104,8 @@ exit();
 
     if(mysqli_num_rows($run_query)>0)
     {
-echo "<script>alert('Email $user_email is already exist in our database, Please try another one!')</script>";
-exit();
+      echo "<script>alert('Email $user_email is already exist in our database, Please try another one!')</script>";
+      exit();
     }
 //insert the user into the database.
     $insert_user="insert into users (first_name, last_name, user_pass, user_email) VALUE ('$first_name','$last_name','$user_pass','$user_email')";
