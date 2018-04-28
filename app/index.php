@@ -36,7 +36,7 @@ session_start();//session starts here
         <div class="col-sm"></div>
           <div class="col-sm">
             <!-- Below form action needs to be changed based on the php script. -->
-            <form name="input" autocomplete="off" method="post" action="login.php" >
+            <form name="input" autocomplete="off" method="post" action="index.php" >
               <form>
               <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
 
