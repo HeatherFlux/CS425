@@ -37,10 +37,10 @@ if(!$_SESSION['email'])
               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Purchase</a>
+              <a class="nav-link" href="purchase.php">Purchase</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Upload</a>
+              <a class="nav-link" href="addtoproducts.php">Add/a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Logout</a>
