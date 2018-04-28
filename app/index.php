@@ -80,7 +80,7 @@ if(isset($_POST['login']))
         echo "<script>window.open('welcome.php','_self')</script>";
 
         $_SESSION['email']=$user_email;//here session is used and value of $user_email store in $_SESSION.
-
+        $_SESSION['fname']=$first_name;
     }
     else
     {
