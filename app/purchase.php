@@ -20,7 +20,7 @@ if(!$_SESSION['email'])
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>View Products</title>
+    <title>Purchase Products</title>
 </head>
 
 <body class="text-center">
@@ -87,20 +87,24 @@ if(!$_SESSION['email'])
 						<th></th>
                         
                     </tr>
-                </thead>                <?php
+                </thead>               
+				<?php
                 include("db_connection.php");
 
 				//Search product name
 
-				$search_product=$_POST['p_name'];
-				$view_selected_search="select * from product where product_name is $_POST['p_name']";
-				$run0=mysqli_query(($dbcon,$view_selected_search);
 
-				
+				if (isset($search_product)){
+					$search_product=$_POST['p_name'];
+					$view_selected_search="select * from product where product_name = $search_product";
+					$run=mysqli_query($dbcon,$view_selected_search);
+				}
+				else
+				{
+					$view_products_query="select * from product"; //select query for viewing users.
+					$run=mysqli_query($dbcon,$view_products_query);//here run the sql query
+				}
 
-
-                $view_products_query="select * from product"; //select query for viewing users.
-                $run=mysqli_query($dbcon,$view_products_query);//here run the sql query.
                 while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.
                 {
                     $product_id=$row[0];
@@ -113,7 +117,7 @@ if(!$_SESSION['email'])
                     $product_cost=$row[7];
                     $product_description=$row[8];
                     $product_image_link=$row[9];
-?>
+					?>
 
 					<tr>
 						<!--here showing results in the table -->
