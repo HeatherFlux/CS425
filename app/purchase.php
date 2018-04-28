@@ -49,7 +49,7 @@ if(!$_SESSION['email'])
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search Product Name" aria-label="Search">
+            <input class="form-control mr-sm-2" type="search_product" name="p_name" placeholder="Search Product Name" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form> -->
         </div>
@@ -89,6 +89,16 @@ if(!$_SESSION['email'])
                     </tr>
                 </thead>                <?php
                 include("db_connection.php");
+
+				//Search product name
+
+				$search_product=$_POST['p_name'];
+				$view_selected_search="select * from product where product_name is $_POST['p_name']";
+				$run0=mysqli_query(($dbcon,$view_selected_search);
+
+				
+
+
                 $view_products_query="select * from product"; //select query for viewing users.
                 $run=mysqli_query($dbcon,$view_products_query);//here run the sql query.
                 while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.
@@ -120,6 +130,8 @@ if(!$_SESSION['email'])
 						<td><input class="form-control mr-sm-2" type="search" placeholder="Quantity" aria-label="Quantity"></td>
 						<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Purchase</button></a></td> 
 					</tr><?php 
+
+					
 				} ?>
             </table>
     </div>
