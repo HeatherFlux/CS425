@@ -65,7 +65,7 @@ session_start();//session starts here
 
 <?php
 
-include("db_conection.php");
+include("db_connection.php");
 if(isset($_POST['login']))
 {
     $user_email=$_POST['email'];
@@ -74,7 +74,7 @@ if(isset($_POST['login']))
     $check_user="select * from users WHERE user_email='$user_email'AND user_pass='$user_pass'";
 
     $run=mysqli_query($dbcon,$check_user);
-    
+
     if(mysqli_num_rows($run))
     {
         echo "<script>window.open('welcome.php','_self')</script>";
