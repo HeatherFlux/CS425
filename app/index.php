@@ -93,22 +93,8 @@ if(isset($_POST['login']))
         $_SESSION['fname']=$first_name;
         $_SESSION['lname']=$last_name;
         $_SESSION['id']=$user_id;
-        
+
     }
 
 }
-?>
-
-include("db_connection.php");
-$view_users_query="select * from users";//select query for viewing users.
-$run=mysqli_query($dbcon,$view_users_query);//here run the sql query.
-
-while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.
-{
-    $user_id=$row[0];
-    $user_name=$row[1];
-    $user_email=$row[2];
-    $user_pass=$row[3];
-  }
-
 ?>
