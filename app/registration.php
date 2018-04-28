@@ -60,10 +60,11 @@
 </html>
 
 <?php
+//hi, hi
 
 // FIX ME, This section needs to be filled
 
-include("db_conection.php");//make connection here
+include("db_connection.php");//make connection here
 if(isset($_POST['register']))
 {
     $first_name=$_POST['nameFirst'];
