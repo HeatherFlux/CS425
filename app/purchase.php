@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 
 if(!$_SESSION['email'])
@@ -95,7 +95,7 @@ if(!$_SESSION['email'])
         //echo $search_product; //testing
         if (isset($search_product))
         {
-          $view_selected_search="select * from product where product_name = '$search_product'";
+          $view_selected_search="select * from product where product_name LIKE '%$search_product%'";
           echo $view_selected_search; //testing
       		$run=mysqli_query($dbcon,$view_selected_search);
       	}
