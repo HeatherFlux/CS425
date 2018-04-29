@@ -136,7 +136,7 @@ if(!$_SESSION['email'])
      }
 
  //insert the user into the database.
-     $update_user="UPDATE `customer` SET `account_password` = $newpass WHERE `customer`.`email` = $email";
+     $update_user="UPDATE 'customer' SET 'account_password'='$newpass' WHERE 'customer'.'email'='$email'";
      if(mysqli_query($dbcon,$update_user))
      {
          echo"<script>window.open('welcome.php','_self')</script>";
