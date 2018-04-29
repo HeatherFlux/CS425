@@ -97,15 +97,11 @@ if(!$_SESSION['email'])
         if (isset($_POST['quantity']))
         {
             $wallet=$_SESSION['wallet'];
-            echo $wallet;
+            //echo $wallet;
             $get_price_query = "select product_cost from product where product_name like '%".$_POST['p_name']."%'";
             $product_price = mysqli_query($dbcon, $get_price_query);
             $wallet = $wallet - ($product_price * $_POST['quantity']);
         }
-
-        $wallet=$_SESSION['wallet'];
-        //$_SESSION['wallet'] = $_SESSION['wallet'] - ;
-        //echo $_SESSION['wallet'];
 
         /*
         //if purchased, update quantity
