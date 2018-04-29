@@ -1,18 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app",
-    "\\app\\functions_luke",
+    "\\build",
+    "\\dist",
+    "\\dist\\js",
     "\\docs",
     "\\docs\\4.0",
-    "\\docs\\4.0\\about",
-    "\\docs\\4.0\\examples",
-    "\\docs\\4.0\\examples\\tooltip-viewport",
-    "\\docs\\4.0\\layout",
+    "\\docs\\4.0\\components",
     "\\js",
-    "\\js\\dist",
-    "\\js\\src"
+    "\\scss",
+    "\\scss\\mixins"
   ],
-  "SelectedNode": "\\app\\purchase.php",
+  "SelectedNode": "\\app\\functions_luke\\UploadProduct.php",
   "PreviewInSolutionExplorer": false
 }

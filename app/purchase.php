@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 if(!$_SESSION['email'])
@@ -92,7 +92,7 @@ if(!$_SESSION['email'])
         include("db_connection.php");
 
         //Search product name
-        $search_product = $_POST['p_name'];
+        //$search_product = $_POST['p_name'];
         //$search_product = htmlspecialchars($search_product);
         //$search_product = mysql_real_escape_string($search_product);
 
@@ -100,9 +100,10 @@ if(!$_SESSION['email'])
         // echo $search_product;
         echo " \n";
 
-        if (isset($search_product))
+        if (isset($_POST['p_name']))
         {
-            $view_selected_search="select * from product where product_name like '%".$search_product."%'";
+            //$view_selected_search="select * from product where product_name like '%".$search_product."%'";
+            $view_selected_search="select * from product where product_name like '%".$_POST['p_name']."%'";
             echo $view_selected_search; //testing
         	  $run=mysqli_query($dbcon,$view_selected_search);
       	}
