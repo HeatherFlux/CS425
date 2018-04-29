@@ -104,7 +104,7 @@ if(!$_SESSION['email'])
         {
             //$view_selected_search="select * from product where product_name like '%".$search_product."%'";
             $view_selected_search="select * from product where product_name like '%".$_POST['p_name']."%'";
-            echo $view_selected_search; //testing
+            //echo $view_selected_search; //testing
         	  $run=mysqli_query($dbcon,$view_selected_search);
       	}
       	else
