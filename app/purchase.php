@@ -102,7 +102,7 @@ if(!$_SESSION['email'])
             $get_price_query = "select product_cost from product where product_name like '%".$_POST['p_name']."%'";
             $product_price = mysqli_query($dbcon, $get_price_query);
             $wallet = $wallet - ($product_price * $_POST['quantity']); //update current wallet
-            $_SESSION['wallet'] = $_SESSION['wallet'] - ($product_price * $_POST['quantity']); //update session wallet
+            $_SESSION['wallet'] = $_SESSION['wallet'] - ($product_price * $_POST['quantity']);
         }
 
         /*
