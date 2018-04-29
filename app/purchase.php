@@ -105,7 +105,7 @@ if(!$_SESSION['email'])
 
         $wallet=$_SESSION['wallet'];
         //$_SESSION['wallet'] = $_SESSION['wallet'] - ;
-        echo $_SESSION['wallet'];
+        //echo $_SESSION['wallet'];
 
         /*
         //if purchased, update quantity
@@ -160,9 +160,9 @@ if(!$_SESSION['email'])
       			<td><?php echo $product_description;  ?></td>
       			<td><?php echo $product_image_link;  ?></td>
       			<td>
-                    <label for="quantity" class="sr-only">Quantity</label>
-                    <input class="form-control mr-sm-2" type="number" name="quantity" value="0" placeholder="Quantity" aria-label="Quantity" />
-                  </td>
+                      <label for="quantity" class="sr-only">Quantity</label>
+                      <input class="form-control mr-sm-2" type="text" name="quantity" placeholder="Quantity" aria-label="Quantity" />
+                </td>
                 <td>
                     <form class="form-inline my-2 my-lg-0" method="post" action="purchase.php">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Purchase</button>
