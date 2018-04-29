@@ -85,6 +85,7 @@ if(isset($_POST['login']))
     }
     while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.
     {
+      $_SESSION['uid']=$row[0];
       $_SESSION['name']=$row[1];
       $_SESSION['email']=$row[2];
       $_SESSION['phone_number']=$row[3];
