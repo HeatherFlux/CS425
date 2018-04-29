@@ -51,7 +51,7 @@ if(!$_SESSION['email'])
               <a class="nav-link" href="logout.php">Logout</a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0" name="input" method="GET" action="purchase.php">
+          <form class="form-inline my-2 my-lg-0" name="input" method="post" action="purchase.php">
             <label for="p_name" class="sr-only">Search</label>
             <input class="form-control mr-sm-2" type="text" name="p_name" placeholder="Search Product Name" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -92,18 +92,19 @@ if(!$_SESSION['email'])
         include("db_connection.php");
 
         //Search product name
-        $search_product = $_GET['p_name']; 
+        $search_product = $_POST['p_name'];
         //$search_product = htmlspecialchars($search_product);
         //$search_product = mysql_real_escape_string($search_product);
 
-        $test = mysqli_query($dbcon, "Select * from product where ('product_name' LIKE '%".$search_product."%'");
-        //echo $_POST['p_name']; 
-        
+        // $test = mysqli_query($dbcon, "Select * from product where ('product_name' LIKE '%".$search_product."%'");
+        // echo $search_product;
+        echo " \n";
+
         if (isset($search_product))
         {
-            $view_selected_search="select * from product where product_name '$search_product'";
+            $view_selected_search="select * from product where product_name like '%".$search_product."%'";
             echo $view_selected_search; //testing
-        	$run=mysqli_query($dbcon,$view_selected_search);
+        	  $run=mysqli_query($dbcon,$view_selected_search);
       	}
       	else
       	{
