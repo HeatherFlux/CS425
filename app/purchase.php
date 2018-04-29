@@ -133,9 +133,7 @@ if(!$_SESSION['email'])
       			<td><input class="form-control mr-sm-2" type="search" placeholder="Quantity" aria-label="Quantity"></td>
       			<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Purchase</button></a></td>
       		</tr>
-          <?php
-        }
-        ?>
+        <?php } ?>
       </table>
     </div>
   </body>
