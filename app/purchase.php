@@ -91,8 +91,9 @@ if(!$_SESSION['email'])
               <?php
         include("db_connection.php");
 
-        $q = (isset($_POST['quantity']) ? $_POST['quantity'] : null);
-        echo $q;
+        //$q = (isset($_POST['quantity']) ? $_POST['quantity'] : null);
+        //echo $q;
+
         //update wallet
         if (isset($_POST['quantity']))
         {
@@ -100,7 +101,8 @@ if(!$_SESSION['email'])
             //echo $wallet;
             $get_price_query = "select product_cost from product where product_name like '%".$_POST['p_name']."%'";
             $product_price = mysqli_query($dbcon, $get_price_query);
-            $wallet = $wallet - ($product_price * $_POST['quantity']);
+            $wallet = $wallet - ($product_price * $_POST['quantity']); //update current wallet
+            $_SESSION['wallet'] = $_SESSION['wallet'] - ($product_price * $_POST['quantity']); //update session wallet
         }
 
         /*
