@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 
 if(!$_SESSION['email'])
@@ -88,31 +88,52 @@ if(!$_SESSION['email'])
               </tr>
             </thead>
 
-      	<?php
+              <?php
         include("db_connection.php");
 
+        $q = (isset($_POST['quantity']) ? $_POST['quantity'] : null);
+        echo $q;
+        //update wallet
+        if (isset($_POST['quantity']))
+        {
+            $wallet=$_SESSION['wallet'];
+            echo $wallet;
+            $get_price_query = "select product_cost from product where product_name like '%".$_POST['p_name']."%'";
+            $product_price = mysqli_query($dbcon, $get_price_query);
+            $wallet = $wallet - ($product_price * $_POST['quantity']);
+        }
+
+        $wallet=$_SESSION['wallet'];
+        //$_SESSION['wallet'] = $_SESSION['wallet'] - ;
+        echo $_SESSION['wallet'];
+
+        /*
+        //if purchased, update quantity
+        if ((isset($_POST['quantity'])) & (isset($_POST['p_name'])))
+        {
+            $quantity_purchased = $_POST['quantity'];
+            echo 'hello';
+            $product_name = $_POST['p_name'];
+            echo $quantity_purchased;
+            $update_query="UPDATE product SET product_quantity = product_quantity - '$quantity_purchased' where product_name like '%".$_POST['p_name']."%'";
+            mysqli_query($dbcon, $update_query);
+        }
+        */
+
+
         //Search product name
-        //$search_product = $_POST['p_name'];
-        //$search_product = htmlspecialchars($search_product);
-        //$search_product = mysql_real_escape_string($search_product);
-
-        // $test = mysqli_query($dbcon, "Select * from product where ('product_name' LIKE '%".$search_product."%'");
-        // echo $search_product;
-        echo " \n";
-
         if (isset($_POST['p_name']))
         {
             //$view_selected_search="select * from product where product_name like '%".$search_product."%'";
-            $view_selected_search="select * from product where product_name like '%".$_POST['p_name']."%'";
-            //echo $view_selected_search; //testing
-        	  $run=mysqli_query($dbcon,$view_selected_search);
+            $view_selected_search="select * from product where product_name like '%".$_POST['p_name']."%' OR product_category='p_name'"; //doesn't work when searching for category
+        	$run=mysqli_query($dbcon,$view_selected_search);
       	}
       	else
       	{
-      		$view_products_query="select * from product"; //select query for viewing users.
-             echo $view_products_query; //testing
+      		$view_products_query="select * from product"; //select query for viewing products.
       		$run=mysqli_query($dbcon,$view_products_query);//here run the sql query
       	}
+
         while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.
         {
           $product_id=$row[0];
@@ -125,7 +146,7 @@ if(!$_SESSION['email'])
           $product_cost=$row[7];
           $product_description=$row[8];
           $product_image_link=$row[9];
-      		?>
+              ?>
           <tr>
             <!--here showing results in the table -->
       			<td><?php echo $product_id;  ?></td>
@@ -138,9 +159,17 @@ if(!$_SESSION['email'])
       			<td><?php echo $product_cost;  ?></td>
       			<td><?php echo $product_description;  ?></td>
       			<td><?php echo $product_image_link;  ?></td>
-      			<td><input class="form-control mr-sm-2" type="search" placeholder="Quantity" aria-label="Quantity"></td>
-      			<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Purchase</button></a></td>
+      			<td>
+                    <label for="quantity" class="sr-only">Quantity</label>
+                    <input class="form-control mr-sm-2" type="number" name="quantity" value="0" placeholder="Quantity" aria-label="Quantity" />
+                  </td>
+                <td>
+                    <form class="form-inline my-2 my-lg-0" method="post" action="purchase.php">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Purchase</button>
+                    </form>
+                </td>
       		</tr>
+
         <?php } ?>
       </table>
     </div>
