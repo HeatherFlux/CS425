@@ -51,17 +51,11 @@ if(!$_SESSION['email'])
               <a class="nav-link" href="logout.php">Logout</a>
             </li>
           </ul>
-<<<<<<< HEAD
           <form class="form-inline my-2 my-lg-0" name="input" method="post" action="purchase.php">
+            <label for="p_name" class="sr-only">Search</label>
             <input class="form-control mr-sm-2" type="search_product" name="p_name" placeholder="Search Product Name" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form> -->
-=======
-          <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="text" name='p_name' placeholder="Search Product Name" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
->>>>>>> 7458aaeb9ee9d3d67cec58a8ecbe05febff1bc02
         </div>
       </nav>
     </div>
@@ -120,7 +114,7 @@ if(!$_SESSION['email'])
 
                 while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.
                 {
-                   
+
                     $product_id=$row[0];
                     $product_owner=$row[1];
                     $product_name=$row[2];
