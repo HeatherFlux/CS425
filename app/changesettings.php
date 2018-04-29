@@ -41,10 +41,10 @@ if(!$_SESSION['email'])
             <li class="nav-item">
               <a class="nav-link" href="purchase.php">Purchase</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="addtoproducts.php">Add</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="changesettings.php">User Settings</a>
             </li>
             <li class="nav-item">
