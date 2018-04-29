@@ -135,7 +135,7 @@ if(!$_SESSION['email'])
        exit();
      }
 
- //insert the user into the database.
+ //Update not quite right, also their needs to be an if statement based around whether the address gets changed.
      $update_user="UPDATE 'customer' SET 'account_password'='$newpass' WHERE 'customer'.'email'='$email'";
      if(mysqli_query($dbcon,$update_user))
      {
