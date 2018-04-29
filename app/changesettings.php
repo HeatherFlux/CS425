@@ -41,10 +41,10 @@ if(!$_SESSION['email'])
             <li class="nav-item">
               <a class="nav-link" href="purchase.php">Purchase</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="addtoproducts.php">Add</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="changesettings.php">User Settings</a>
             </li>
             <li class="nav-item">
@@ -83,12 +83,12 @@ if(!$_SESSION['email'])
                 <div class="container">
                   <p>Enter New Password
                   <label for="newpass" class="sr-only">Password</label>
-                  <input type="password" name="newpass" class="form-control" placeholder="New Password" required></p>
+                  <input type="password" name="newpass" class="form-control" placeholder="New Password"></p>
                 </div>
                 <div class="container">
                   <p>Confirm New Password
                   <label for="conpass" class="sr-only">Confirm Password</label>
-                  <input type="password" name="conpass" class="form-control" placeholder="Confirm New Password" required></p>
+                  <input type="password" name="conpass" class="form-control" placeholder="Confirm New Password"></p>
                 </div>
                 <div class="container">
                   <p>Change Address By Entering
@@ -144,20 +144,38 @@ if(!$_SESSION['email'])
      // Make sure typed pass is == tp accpass
      if($oldpass==$apass)
      {
-       $update_user="UPDATE customer SET account_password='$newpass' WHERE customer_id='$uid'";
-       if(mysqli_query($dbcon,$update_user))
-       {
-           echo "success";
-       }
-       else{
-         printf("Connect failed: %s\n", mysqli_errno($dbcon));
+       if($_POST['newpass']!==''){
+         $update_user="UPDATE customer SET account_password='$newpass' WHERE customer_id='$uid'";
+         if(mysqli_query($dbcon,$update_user))
+         {
+             echo "Password Updated\n";
+             $_SESSION['aPass']=$newpass;
+         }
+         else{
+           printf("Connect failed: %s\n", mysqli_errno($dbcon));
 
-         exit;
+           exit;
+         }
+       }
+       if($_POST['newadd']!=='')
+       {
+         $update_user="UPDATE customer SET address='$newadd' WHERE customer_id='$uid'";
+         if(mysqli_query($dbcon,$update_user))
+         {
+             echo "Address Change\n";
+             $_SESSION['address']=$newadd;
+         }
+         else{
+           printf("Connect failed: %s\n", mysqli_errno($dbcon));
+           exit;
+         }
+
        }
      }
      else
      {
        echo "<script>alert('Account Password Doesn't Match')</script>";
      }
+
  }
  ?>
