@@ -61,7 +61,7 @@
               <label for="inputPasswordC" class="sr-only">PasswordC</label>
               <input type="password" name="inputPasswordC" class="form-control" placeholder="Confirm Password" required>
               <br>
-                <button style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;" class="btn btn-lg btn-success btn-block" type="submit" name="register">Sign in</button>
+                <button style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;" class="btn btn-lg btn-success btn-block" type="submit" name="register">Register</button>
                 <p>Have an Account? <a href="index.php">Login</a></p>
             </form>
           </div>
@@ -73,10 +73,6 @@
 </html>
 
 <?php
-
-
-// FIX ME, This section needs to be filled
-
 include("db_connection.php");//make connection here
 if(isset($_POST['register']))
 {
@@ -118,12 +114,8 @@ if(isset($_POST['register']))
     else{
       echo "Error: Unable to connect to MySQL." . PHP_EOL;
       printf("Connect failed: %s\n", mysqli_errno($dbcon));
-     
+
       exit;
     }
-
-
-
 }
-
 ?>
