@@ -67,30 +67,26 @@ if(!$_SESSION['email'])
         <!-- About Your App -->
         <p class="lead">Small webapp for uploading products to a database.</p>
       </div>
-
-
-    <div class="table-scrol">
+      <div class="table-scrol">
         <h1 align="center">All Current Products</h1>
         <div class="table-responsive">
-            <!--this is used for responsive display in mobile and other devices-->
-            <table class="table table-bordered table-hover table-striped" style="table-layout: fixed">
-                <thead>
-
-                    <tr>
-                        <th>Product Id</th>
-                        <th>Product Owner</th>
-                        <th>Product Name</th>
-                        <th>Product Weight</th>
-                        <th>Product Category</th>
-                        <th>Product Quantity</th>
-                        <th>Product Color</th>
-                        <th>Product Cost</th>
-                        <th>Product Description</th>
-                        <th>Product Image</th>
-						<th>Amount of Products Purchasing</th>
-						<th></th>
-          </tr>
-        </thead>
+          <table class="table table-bordered table-hover table-striped" style="table-layout: fixed">
+            <thead>
+              <tr>
+                <th>Product Id</th>
+                <th>Product Owner</th>
+                <th>Product Name</th>
+                <th>Product Weight</th>
+                <th>Product Category</th>
+                <th>Product Quantity</th>
+                <th>Product Color</th>
+                <th>Product Cost</th>
+                <th>Product Description</th>
+                <th>Product Image</th>
+                <th>Amount of Products Purchasing</th>
+                <th></th>
+              </tr>
+            </thead>
 
       	<?php
         include("db_connection.php");
@@ -137,7 +133,9 @@ if(!$_SESSION['email'])
       			<td><input class="form-control mr-sm-2" type="search" placeholder="Quantity" aria-label="Quantity"></td>
       			<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Purchase</button></a></td>
       		</tr>
+          <?php
         }
+        ?>
       </table>
     </div>
   </body>
