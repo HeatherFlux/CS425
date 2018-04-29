@@ -29,7 +29,7 @@ if(!$_SESSION['email'])
     <!-- NAVBAR -->
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Welcome <?php echo $_SESSION['name'];?></a>
+        <a class="navbar-brand" href="#">Welcome <?php echo $_SESSION['name'];?> $<?php echo $_SESSION['wallet'];?></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -96,7 +96,7 @@ if(!$_SESSION['email'])
                   <input type="text" name="newadd" class="form-control" placeholder="Change Address"></p>
                 </div>
 
-                  <button style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;" class="btn btn-lg btn-success btn-block" type="submit" value="login" name="login">Submit</button>
+                  <button style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;" class="btn btn-lg btn-success btn-block" type="submit" value="change" name="change">Submit</button>
               </form>
             </div>
           <div class="col-sm"></div>
@@ -121,31 +121,43 @@ if(!$_SESSION['email'])
 
  <?php
  include("db_connection.php");//make connection here
- if(isset($_POST['register']))
+ if(isset($_POST['change']))
  {
-     $oldpass=$_POST['oldpass'];
-     $newpass=$_POST['newpass'];
-     $conpass=$_POST['conpass'];
-     $newadd=$_POST['newadd'];
-     $email=$_SESSION['email'];
+   // FORM DATA
+   $oldpass=$_POST['oldpass'];
+   $newpass=$_POST['newpass'];
+   $conpass=$_POST['conpass'];
+   $newadd=$_POST['newadd'];
 
-     if($oldpass=='' or $newpass=='' or $conpass=='' or $newpass!=$conpass)
+   // Session Data
+   $apass=$_SESSION['aPass'];
+   $email=$_SESSION['email'];
+   $uid=$_SESSION['uid'];
+
+      // Test that new passwords match
+     if($newpass!==$conpass)
      {
-       echo"<script>alert('missing field')</script>";
+       echo"<script>alert('New passwords don't match ')</script>";
        exit();
      }
 
- //Update not quite right, also their needs to be an if statement based around whether the address gets changed.
-     $update_user="UPDATE 'customer' SET 'account_password'='$newpass' WHERE 'customer'.'email'='$email'";
-     if(mysqli_query($dbcon,$update_user))
+     // Make sure typed pass is == tp accpass
+     if($oldpass==$apass)
      {
-         echo"<script>window.open('welcome.php','_self')</script>";
-     }
-     else{
-       echo "Error: Unable to connect to MySQL." . PHP_EOL;
-       printf("Connect failed: %s\n", mysqli_errno($dbcon));
+       $update_user="UPDATE customer SET account_password='$newpass' WHERE customer_id='$uid'";
+       if(mysqli_query($dbcon,$update_user))
+       {
+           echo "success";
+       }
+       else{
+         printf("Connect failed: %s\n", mysqli_errno($dbcon));
 
-       exit;
+         exit;
+       }
+     }
+     else
+     {
+       echo "<script>alert('Account Password Doesn't Match')</script>";
      }
  }
  ?>
