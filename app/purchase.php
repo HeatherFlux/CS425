@@ -51,10 +51,17 @@ if(!$_SESSION['email'])
               <a class="nav-link" href="logout.php">Logout</a>
             </li>
           </ul>
+<<<<<<< HEAD
           <form class="form-inline my-2 my-lg-0" name="input" method="post" action="purchase.php">
             <input class="form-control mr-sm-2" type="search_product" name="p_name" placeholder="Search Product Name" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form> -->
+=======
+          <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="text" name='p_name' placeholder="Search Product Name" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+>>>>>>> 7458aaeb9ee9d3d67cec58a8ecbe05febff1bc02
         </div>
       </nav>
     </div>
@@ -91,25 +98,29 @@ if(!$_SESSION['email'])
 
                     </tr>
                 </thead>
+
 				<?php
                 include("db_connection.php");
 
 				//Search product name
-
+                $search_product = $_POST['p_name']; // <------------------------THIS IS THE VARIABLE.
+               //echo $search_product; //testing
 
 				if (isset($search_product)){
-					$search_product=$_POST['p_name'];
 					$view_selected_search="select * from product where product_name = $search_product";
+                    echo $view_selected_search; //testing
 					$run=mysqli_query($dbcon,$view_selected_search);
 				}
 				else
 				{
 					$view_products_query="select * from product"; //select query for viewing users.
+                    echo $view_products_query; //testing
 					$run=mysqli_query($dbcon,$view_products_query);//here run the sql query
 				}
 
                 while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.
                 {
+                   
                     $product_id=$row[0];
                     $product_owner=$row[1];
                     $product_name=$row[2];
