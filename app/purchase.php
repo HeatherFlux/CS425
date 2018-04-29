@@ -89,64 +89,56 @@ if(!$_SESSION['email'])
                         <th>Product Image</th>
 						<th>Amount of Products Purchasing</th>
 						<th></th>
+          </tr>
+        </thead>
 
-                    </tr>
-                </thead>
-
-				<?php
-                include("db_connection.php");
-
-				//Search product name
-                $search_product = $_POST['p_name']; // <------------------------THIS IS THE VARIABLE.
-               //echo $search_product; //testing
-
-				if (isset($search_product)){
-					$view_selected_search="select * from product where product_name = $search_product";
-                    echo $view_selected_search; //testing
-					$run=mysqli_query($dbcon,$view_selected_search);
-				}
-				else
-				{
-					$view_products_query="select * from product"; //select query for viewing users.
-                    echo $view_products_query; //testing
-					$run=mysqli_query($dbcon,$view_products_query);//here run the sql query
-				}
-
-                while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.
-                {
-
-                    $product_id=$row[0];
-                    $product_owner=$row[1];
-                    $product_name=$row[2];
-                    $product_weight=$row[3];
-                    $product_category=$row[4];
-                    $product_quantity=$row[5];
-                    $product_color=$row[6];
-                    $product_cost=$row[7];
-                    $product_description=$row[8];
-                    $product_image_link=$row[9];
-					?>
-
-					<tr>
-						<!--here showing results in the table -->
-						<td><?php echo $product_id;  ?></td>
-						<td><?php echo $product_owner;  ?></td>
-						<td><?php echo $product_name;  ?></td>
-						<td><?php echo $product_weight;  ?></td>
-						<td><?php echo $product_category;  ?></td>
-						<td><?php echo $product_quantity;  ?></td>
-						<td><?php echo $product_color;  ?></td>
-						<td><?php echo $product_cost;  ?></td>
-						<td><?php echo $product_description;  ?></td>
-						<td><?php echo $product_image_link;  ?></td>
-						<td><input class="form-control mr-sm-2" type="search" placeholder="Quantity" aria-label="Quantity"></td>
-						<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Purchase</button></a></td>
-					</tr><?php
-
-
-				} ?>
-            </table>
+      	<?php
+        include("db_connection.php");
+        //Search product name
+        $search_product = $_POST['p_name']; // <------------------------THIS IS THE VARIABLE.
+        //echo $search_product; //testing
+        if (isset($search_product))
+        {
+          $view_selected_search="select * from product where product_name = '$search_product'";
+          echo $view_selected_search; //testing
+      		$run=mysqli_query($dbcon,$view_selected_search);
+      	}
+      	else
+      	{
+      		$view_products_query="select * from product"; //select query for viewing users.
+          echo $view_products_query; //testing
+      		$run=mysqli_query($dbcon,$view_products_query);//here run the sql query
+      	}
+        while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.
+        {
+          $product_id=$row[0];
+          $product_owner=$row[1];
+          $product_name=$row[2];
+          $product_weight=$row[3];
+          $product_category=$row[4];
+          $product_quantity=$row[5];
+          $product_color=$row[6];
+          $product_cost=$row[7];
+          $product_description=$row[8];
+          $product_image_link=$row[9];
+      		?>
+          <tr>
+            <!--here showing results in the table -->
+      			<td><?php echo $product_id;  ?></td>
+      			<td><?php echo $product_owner;  ?></td>
+      			<td><?php echo $product_name;  ?></td>
+      			<td><?php echo $product_weight;  ?></td>
+      			<td><?php echo $product_category;  ?></td>
+      			<td><?php echo $product_quantity;  ?></td>
+      			<td><?php echo $product_color;  ?></td>
+      			<td><?php echo $product_cost;  ?></td>
+      			<td><?php echo $product_description;  ?></td>
+      			<td><?php echo $product_image_link;  ?></td>
+      			<td><input class="form-control mr-sm-2" type="search" placeholder="Quantity" aria-label="Quantity"></td>
+      			<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Purchase</button></a></td>
+      		</tr>
+        }
+      </table>
     </div>
-</body>
-
+  </body>
 </html>
