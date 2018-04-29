@@ -51,9 +51,9 @@ if(!$_SESSION['email'])
               <a class="nav-link" href="logout.php">Logout</a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0" name="input" method="post" action="purchase.php">
+          <form class="form-inline my-2 my-lg-0" name="input" method="GET" action="purchase.php">
             <label for="p_name" class="sr-only">Search</label>
-            <input class="form-control mr-sm-2" type="search_product" name="p_name" placeholder="Search Product Name" aria-label="Search">
+            <input class="form-control mr-sm-2" type="text" name="p_name" placeholder="Search Product Name" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
         </div>
@@ -90,19 +90,25 @@ if(!$_SESSION['email'])
 
       	<?php
         include("db_connection.php");
+
         //Search product name
-        $search_product = $_POST['p_name']; // <------------------------THIS IS THE VARIABLE.
-        //echo $search_product; //testing
+        $search_product = $_GET['p_name']; 
+        //$search_product = htmlspecialchars($search_product);
+        //$search_product = mysql_real_escape_string($search_product);
+
+        $test = mysqli_query($dbcon, "Select * from product where ('product_name' LIKE '%".$search_product."%'");
+        //echo $_POST['p_name']; 
+        
         if (isset($search_product))
         {
-          $view_selected_search="select * from product where product_name LIKE '%$search_product%'";
-          echo $view_selected_search; //testing
-      		$run=mysqli_query($dbcon,$view_selected_search);
+            $view_selected_search="select * from product where product_name '$search_product'";
+            echo $view_selected_search; //testing
+        	$run=mysqli_query($dbcon,$view_selected_search);
       	}
       	else
       	{
       		$view_products_query="select * from product"; //select query for viewing users.
-          echo $view_products_query; //testing
+             echo $view_products_query; //testing
       		$run=mysqli_query($dbcon,$view_products_query);//here run the sql query
       	}
         while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.
