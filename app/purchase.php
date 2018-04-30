@@ -95,39 +95,48 @@ if(!$_SESSION['email'])
 
             /*
               Hey Laura, I fixed the code so that it passes the quantity and
-              product id of what was bought, this way you can chane your sql
-              to update the quantity number as well as the users wallet.
-              also check for things like negative quantity etc etc.
+              product id of what was bought, and then update the quantity
+              number as well as the users wallet. Can you implement a
+              check for things like negative quantity etc etc.
             */
-            $q=$_POST['quantity'];
-            $p=$_POST['productid'];
-            echo '$'.$q;
-            echo ' Pid:'.$p;
 
             //update wallet
             if (isset($_POST['quantity']))
             {
+              $quant=$_POST['quantity'];
+              $pid=$_POST['productid'];
+              // echo 'Quant:'.$quant;
+              // echo ' Pid:'.$pid;
+
               $wallet=$_SESSION['wallet'];
-              //echo $wallet;
-              $get_price_query = "select product_cost from product where product_name like '%".$_POST['p_name']."%'";
-              $product_price = mysqli_query($dbcon, $get_price_query);
-              $wallet = $wallet - ($product_price * $_POST['quantity']); //update current wallet
-              $_SESSION['wallet'] = $_SESSION['wallet'] - ($product_price * $_POST['quantity']);
-            }
+              // get price and convert to int.
+              $get_price_query = "select product_cost from product where product_id like '%".$pid."%'";
+              $product_price = mysqli_query($dbcon, $get_price_query);//gets result
+              $row=mysqli_fetch_assoc($product_price); //converts result to int array
+              // echo ' product cost:'.$row["product_cost"]; // pulls int from array
+              $product_price=$row["product_cost"];
 
-            /*
-            //if purchased, update quantity
-            if ((isset($_POST['quantity'])) & (isset($_POST['p_name'])))
-            {
-                $quantity_purchased = $_POST['quantity'];
-                echo 'hello';
-                $product_name = $_POST['p_name'];
-                echo $quantity_purchased;
-                $update_query="UPDATE product SET product_quantity = product_quantity - '$quantity_purchased' where product_name like '%".$_POST['p_name']."%'";
-                mysqli_query($dbcon, $update_query);
-            }
-            */
+              // get quant and convert
+              $get_quantity_query = "select product_quantity from product where product_id like '%".$pid."%'";
+              $product_quantity = mysqli_query($dbcon, $get_quantity_query);
+              $row=mysqli_fetch_assoc($product_quantity);
+              // echo ' product quant:'.$row["product_quantity"];
+              $product_quantity=$row["product_quantity"];
 
+              //update wallet
+              // echo ' wallet before:'.$wallet;
+              $wallet = $wallet - ($product_price * $quant); //update current wallet
+              // echo ' wallet after:'.$wallet;
+              $_SESSION['wallet'] = $_SESSION['wallet'] - ($product_price * $quant);
+
+              // update quant
+              // echo ' quant before:'.$product_quantity;
+              $product_quantity = $product_quantity-$quant;
+              // echo ' quant after:'.$product_quantity;
+              $update_quantity_query = "UPDATE product SET product_quantity=$product_quantity WHERE product_id like '%".$pid."%'";
+              mysqli_query($dbcon, $update_quantity_query);
+              header("Refresh:0"); // refreshes page to update wallet in the navbar
+            }
 
             //Search product name
             if (isset($_POST['p_name']))
@@ -171,8 +180,8 @@ if(!$_SESSION['email'])
       			<td>
               <form class="form-inline my-2 my-lg-0" name="input" method="post" action="purchase.php">
               <label for="quantity" class="sr-only">Quantity</label>
-              <input type="hidden" name="productid" value="<?= $product_id ?>"/>
-              <input class="form-control mr-sm-2" type="text" name="quantity" placeholder="Quantity" aria-label="Quantity"/>
+              <input type="hidden" name="productid" type="int"  value="<?= $product_id ?>"/>
+              <input class="form-control mr-sm-2" type="int" name="quantity" placeholder="Quantity" aria-label="Quantity"/>
             </td>
             <td>
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Purchase</button>
