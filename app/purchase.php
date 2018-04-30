@@ -95,9 +95,9 @@ if(!$_SESSION['email'])
 
             /*
               Hey Laura, I fixed the code so that it passes the quantity and
-              product id of what was bought, this way you can chane your sql
-              to update the quantity number as well as the users wallet.
-              also check for things like negative quantity etc etc.
+              product id of what was bought, and then update the quantity
+              number as well as the users wallet. Can you implement a
+              check for things like negative quantity etc etc.
             */
 
             //update wallet
@@ -135,22 +135,8 @@ if(!$_SESSION['email'])
               // echo ' quant after:'.$product_quantity;
               $update_quantity_query = "UPDATE product SET product_quantity=$product_quantity WHERE product_id like '%".$pid."%'";
               mysqli_query($dbcon, $update_quantity_query);
-              header("Refresh:0");
+              header("Refresh:0"); // refreshes page to update wallet in the navbar
             }
-
-            /*
-            //if purchased, update quantity
-            if ((isset($_POST['quantity'])) & (isset($_POST['p_name'])))
-            {
-                $quantity_purchased = $_POST['quantity'];
-                echo 'hello';
-                $product_name = $_POST['p_name'];
-                echo $quantity_purchased;
-                $update_query="UPDATE product SET product_quantity = product_quantity - '$quantity_purchased' where product_name like '%".$_POST['p_name']."%'";
-                mysqli_query($dbcon, $update_query);
-            }
-            */
-
 
             //Search product name
             if (isset($_POST['p_name']))
