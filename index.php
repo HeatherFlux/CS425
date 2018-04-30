@@ -1,3 +1,8 @@
+<?php
+session_start();//session starts here
+
+?>
+
 
 
 <!doctype html>
@@ -31,14 +36,14 @@
         <div class="col-sm"></div>
           <div class="col-sm">
             <!-- Below form action needs to be changed based on the php script. -->
-            <form class="form-signin" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST" action="addtodatabase.php" >
-
+            <form name="input" autocomplete="off" method="post" action="index.php" >
+              <form>
               <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
 
-              <label for="inputEmail" class="sr-only">Email address</label>
-              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-              <label for="inputPassword" class="sr-only">Password</label>
-              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+              <label for="email" class="sr-only">Email address</label>
+              <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+              <label for="pass" class="sr-only">Password</label>
+              <input type="password" name="pass" class="form-control" placeholder="Password" required>
 
               <div class="checkbox mb-3">
                 <label>
@@ -46,8 +51,8 @@
                 </label>
               </div>
 
-                <button style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;" class="btn btn-lg btn-primary btn-block"; id="btlogin"; type="submit">Sign in</button>
-                <p>New User? <a href="reg.php">Create your account</a></p>
+                <button style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;" class="btn btn-lg btn-success btn-block" type="submit" value="login" name="login">Sign in</button>
+                <p>New User? <a href="registration.php">Create your account</a></p>
             </form>
           </div>
         <div class="col-sm">
@@ -55,14 +60,42 @@
     </div>
   </body>
 
-
-
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 </html>
+
+
+<?php
+
+include("db_connection.php");
+if(isset($_POST['login']))
+{
+    $user_email=$_POST['email'];
+    $user_pass=$_POST['pass'];
+
+    $check_user="select * from customer WHERE email='$user_email' AND account_password='$user_pass'";
+
+    $run=mysqli_query($dbcon,$check_user);
+
+    if(mysqli_num_rows($run))
+    {
+        echo "<script>window.open('welcome.php','_self')</script>";
+    }
+    else
+    {
+      echo "<script>alert('Email or password is incorrect!')</script>";
+    }
+    while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.
+    {
+      $_SESSION['uid']=$row[0];
+      $_SESSION['name']=$row[1];
+      $_SESSION['email']=$row[2];
+      $_SESSION['phone_number']=$row[3];
+      $_SESSION['address']=$row[4];
+      $_SESSION['wallet']=$row[5];
+      $_SESSION['aName']=$row[6];
+      $_SESSION['aPass']=$row[7];
+      $_SESSION['pCount']=$row[8];
+      $_SESSION['cRegion']=$row[9];
+    }
+
+}
+?>
