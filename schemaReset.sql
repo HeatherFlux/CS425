@@ -1,4 +1,13 @@
 
+DROP TABLE warehouse_product;
+DROP TABLE warehouse;
+DROP TABLE employee;
+DROP TABLE product;
+DROP TABLE customer;
+DROP TABLE region;
+DROP TABLE category;
+
+
 CREATE TABLE `category` (
 `category_id` int primary key AUTO_INCREMENT,
 `category_name` varchar(30) not null
