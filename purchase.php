@@ -1,8 +1,9 @@
-﻿<?php
+<?php
 session_start();
 
 if(!$_SESSION['email'])
 {
+
     header("Location: index.php");//redirect to login page to secure the welcome page without login access.
 }
 
@@ -66,13 +67,11 @@ if(!$_SESSION['email'])
         <!-- About Your App -->
         <p class="lead">Small webapp for uploading products to a database.</p>
       </div>
-
-      <!-- the table starts here -->
-      <div class="table-scroll">
+      <div class="table-scrol">
         <h1 align="center">All Current Products</h1>
         <div class="table-responsive">
-          <table class="table table-bordered table-hover table-striped">
-            <thead class="thead-dark">
+          <table class="table table-bordered table-hover table-striped" style="table-layout: fixed">
+            <thead>
               <tr>
                 <th>Product Id</th>
                 <th>Product Owner</th>
@@ -84,78 +83,49 @@ if(!$_SESSION['email'])
                 <th>Product Cost</th>
                 <th>Product Description</th>
                 <th>Product Image</th>
-                <th>Purchase Amount</th>
+                <th>Amount of Products Purchasing</th>
                 <th></th>
               </tr>
             </thead>
-            <tbody>
 
-          <?php
-            include("db_connection.php");
+      	<?php
+        include("db_connection.php");
 
-            /*
-              Hey Laura, I fixed the code so that it passes the quantity and
-              product id of what was bought, this way you can chane your sql
-              to update the quantity number as well as the users wallet.
-              also check for things like negative quantity etc etc.
-            */
-            $q=$_POST['quantity'];
-            $p=$_POST['productid'];
-            echo '$'.$q;
-            echo ' Pid:'.$p;
+        //Search product name
+        //$search_product = $_POST['p_name'];
+        //$search_product = htmlspecialchars($search_product);
+        //$search_product = mysql_real_escape_string($search_product);
 
-            //update wallet
-            if (isset($_POST['quantity']))
-            {
-              $wallet=$_SESSION['wallet'];
-              //echo $wallet;
-              $get_price_query = "select product_cost from product where product_name like '%".$_POST['p_name']."%'";
-              $product_price = mysqli_query($dbcon, $get_price_query);
-              $wallet = $wallet - ($product_price * $_POST['quantity']); //update current wallet
-              $_SESSION['wallet'] = $_SESSION['wallet'] - ($product_price * $_POST['quantity']);
-            }
+        // $test = mysqli_query($dbcon, "Select * from product where ('product_name' LIKE '%".$search_product."%'");
+        // echo $search_product;
+        echo " \n";
 
-            /*
-            //if purchased, update quantity
-            if ((isset($_POST['quantity'])) & (isset($_POST['p_name'])))
-            {
-                $quantity_purchased = $_POST['quantity'];
-                echo 'hello';
-                $product_name = $_POST['p_name'];
-                echo $quantity_purchased;
-                $update_query="UPDATE product SET product_quantity = product_quantity - '$quantity_purchased' where product_name like '%".$_POST['p_name']."%'";
-                mysqli_query($dbcon, $update_query);
-            }
-            */
-
-
-            //Search product name
-            if (isset($_POST['p_name']))
-            {
-                //$view_selected_search="select * from product where product_name like '%".$search_product."%'";
-                $view_selected_search="select * from product where product_name like '%".$_POST['p_name']."%'";
-            	$run=mysqli_query($dbcon,$view_selected_search);
-          	}
-          	else
-          	{
-          		$view_products_query="select * from product"; //select query for viewing products.
-          		$run=mysqli_query($dbcon,$view_products_query);//here run the sql query
-          	}
-
-            while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.
-            {
-              $product_id=$row[0];
-              $product_owner=$row[1];
-              $product_name=$row[2];
-              $product_weight=$row[3];
-              $product_category=$row[4];
-              $product_quantity=$row[5];
-              $product_color=$row[6];
-              $product_cost=$row[7];
-              $product_description=$row[8];
-              $product_image_link=$row[9];
-          ?>
-
+        if (isset($_POST['p_name']))
+        {
+            //$view_selected_search="select * from product where product_name like '%".$search_product."%'";
+            $view_selected_search="select * from product where product_name like '%".$_POST['p_name']."%'";
+            //echo $view_selected_search; //testing
+        	  $run=mysqli_query($dbcon,$view_selected_search);
+      	}
+      	else
+      	{
+      		$view_products_query="select * from product"; //select query for viewing users.
+             echo $view_products_query; //testing
+      		$run=mysqli_query($dbcon,$view_products_query);//here run the sql query
+      	}
+        while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.
+        {
+          $product_id=$row[0];
+          $product_owner=$row[1];
+          $product_name=$row[2];
+          $product_weight=$row[3];
+          $product_category=$row[4];
+          $product_quantity=$row[5];
+          $product_color=$row[6];
+          $product_cost=$row[7];
+          $product_description=$row[8];
+          $product_image_link=$row[9];
+      		?>
           <tr>
             <!--here showing results in the table -->
       			<td><?php echo $product_id;  ?></td>
@@ -168,19 +138,10 @@ if(!$_SESSION['email'])
       			<td><?php echo $product_cost;  ?></td>
       			<td><?php echo $product_description;  ?></td>
       			<td><?php echo $product_image_link;  ?></td>
-      			<td>
-              <form class="form-inline my-2 my-lg-0" name="input" method="post" action="purchase.php">
-              <label for="quantity" class="sr-only">Quantity</label>
-              <input type="hidden" name="productid" value="<?= $product_id ?>"/>
-              <input class="form-control mr-sm-2" type="text" name="quantity" placeholder="Quantity" aria-label="Quantity"/>
-            </td>
-            <td>
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Purchase</button>
-              </form>
-            </td>
+      			<td><input class="form-control mr-sm-2" type="search" placeholder="Quantity" aria-label="Quantity"></td>
+      			<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Purchase</button></a></td>
       		</tr>
-         <?php } ?>
-        </tbody>
+        <?php } ?>
       </table>
     </div>
   </body>
