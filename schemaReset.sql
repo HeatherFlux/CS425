@@ -10,7 +10,7 @@ DROP TABLE category;
 
 CREATE TABLE `category` (
 `category_id` int primary key AUTO_INCREMENT,
-`category_name` varchar(30) not null
+`category_name` varchar(30) unique not null
 );
 
 CREATE TABLE `region` (

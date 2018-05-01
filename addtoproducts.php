@@ -64,65 +64,106 @@ if(!$_SESSION['email'])
         <p class="lead">Small webapp for uploading products to a database.</p>
       </div>
 
+      <div class="container">
+        <div class="row">
+          <div class="col-sm"></div>
+            <div class="col-sm">
+              <!-- Below form action needs to be changed based on the php script. -->
+              <form name="input" autocomplete="off" method="post" action="addtoproducts.php" >
+                <h2>Add Product</h2>
+                <form>
 
-    <div class="table-scrol">
-        <h1 align="center">All Current Products</h1>
-        <div class="table-responsive">
-            <!--this is used for responsive display in mobile and other devices-->
-            <table class="table table-bordered table-hover table-striped" style="table-layout: fixed">
-                <thead>
+                <div class="container">
+                  <label for="oldpass" class="sr-only">Product Name</label>
+                  <input type="text" name="product_name" class="form-control" placeholder="Product Name" required autofocus></p>
+                </div>
 
-                    <tr>
-                        <th>Product Id</th>
-                        <th>Product Owner</th>
-                        <th>Product Name</th>
-                        <th>Product Weight</th>
-                        <th>Product Category</th>
-                        <th>Product Quantity</th>
-                        <th>Product Color</th>
-                        <th>Product Cost</th>
-                        <th>Product Description</th>
-                        <th>Product Image</th>
-                        <th>Delete User</th>
-                    </tr>
-                </thead>                <?php
-                include("db_connection.php");
-                $view_products_query="select * from product"; //select query for viewing users.
-                $run=mysqli_query($dbcon,$view_products_query);//here run the sql query.
-                while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.
-                {
-                    $product_id=$row[0];
-                    $product_owner=$row[1];
-                    $product_name=$row[2];
-                    $product_weight=$row[3];
-                    $product_category=$row[4];
-                    $product_quantity=$row[5];
-                    $product_color=$row[6];
-                    $product_cost=$row[7];
-                    $product_description=$row[8];
-                    $product_image_link=$row[9];
-?>
+                <div class="container">
+                  <label for="newpass" class="sr-only">Product Weight</label>
+                  <input type="text" name="product_weight" class="form-control" placeholder="Product Weight"></p>
+                </div>
 
-                <tr>
-                    <!--here showing results in the table -->
-                    <td><?php echo $product_id;  ?></td>
-                    <td><?php echo $product_owner;  ?></td>
-                    <td><?php echo $product_name;  ?></td>
-                    <td><?php echo $product_weight;  ?></td>
-                    <td><?php echo $product_category;  ?></td>
-                    <td><?php echo $product_quantity;  ?></td>
-                    <td><?php echo $product_color;  ?></td>
-                    <td><?php echo $product_cost;  ?></td>
-                    <td><?php echo $product_description;  ?></td>
-                    <td><?php echo $product_image_link;  ?></td>
-                    <td><a href="delete.php?del=<?php echo $product_id ?>"><button class="btn btn-danger">Delete</button></a></td> <!--btn btn-danger is a bootstrap button to show danger-->
-                </tr><?php } ?>
+                <div class="container">
+                  <label for="conpass" class="sr-only">Product Category</label>
+                  <input type="text" name="product_category" class="form-control" placeholder="Product Category"></p>
+                </div>
 
-            </table>
+                <div class="container">
+                  <label for="newadd" class="sr-only">Product Quantity</label>
+                  <input type="text" name="product_quantity" class="form-control" placeholder="Product Quantity"></p>
+                </div>
+
+                <div class="container">
+                  <label for="newadd" class="sr-only">Product Color</label>
+                  <input type="text" name="product_color" class="form-control" placeholder="Product Color"></p>
+                </div>
+
+                <div class="container">
+                  <label for="newadd" class="sr-only">Product Cost</label>
+                  <input type="text" name="product_cost" class="form-control" placeholder="Product Cost"></p>
+                </div>
+
+                <div class="container">
+                  <label for="newadd" class="sr-only">Product Description</label>
+                  <input type="text" name="product_description" class="form-control" placeholder="Product Description"></p>
+                </div>
+
+                <div class="container">
+                  <label for="newadd" class="sr-only">Product Image</label>
+                  <input type="text" name="product_image" class="form-control" placeholder="Product Image"></p>
+                </div>
+
+                  <button style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;" class="btn btn-lg btn-success btn-block" type="submit" value="change" name="change">Submit</button>
+              </form>
+            </div>
+          <div class="col-sm"></div>
         </div>
-    </div>
-
-
+      </div>
 </body>
-
 </html>
+
+<?php
+include("db_connection.php");//make connection here
+if(isset($_POST['change']))
+{
+  //SQL data
+  $powner=$_SESSION['uid'];
+  $pname=$_POST['product_name'];
+  $pweight=$_POST['product_weight'];
+  $pcat=$_POST['product_category'];
+  $pquan=$_POST['product_quantity'];
+  $pcol=$_POST['product_color'];
+  $pcost=$_POST['product_cost'];
+  $pdesc=$_POST['product_description'];
+  $pimg=$_POST['product_image'];
+
+  //Create new category
+  $newcat = "INSERT INTO category(category_name) VALUES('$pcat')";
+  mysqli_query($dbcon,$newcat);
+
+  //Obtain category ID
+  $getcid = "SELECT category_id FROM category WHERE category_name = '$pcat'";
+  $getcid = mysqli_query($dbcon, $getcid);
+  if(!$getcid) {
+    printf("Failed to obtain category: %s\n", mysqli_errno($dbcon));
+    exit;
+  }
+  $pcat = mysqli_fetch_array($getcid);
+  $pcat = $pcat[0];
+
+  //Upload product
+  $upload = "
+  INSERT INTO product(owner, product_name, product_weight, product_category,
+  product_quantity, product_color, product_cost, product_description, image_link)
+  VALUES ('$powner', '$pname', '$pweight', '$pcat', '$pquan', '$pcol', '$pcost', '$pdesc', '$pimg')
+  ";
+  if(!mysqli_query($dbcon,$upload))
+  {
+    printf("Failed to submit product: %s\n", mysqli_errno($dbcon));
+    exit;
+  }
+
+  //Done!
+  echo "Uploaded the product";
+}
+?>
