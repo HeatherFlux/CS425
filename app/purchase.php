@@ -148,7 +148,10 @@ if(!$_SESSION['email'])
               }
               else
               {
-                  exit("Insufficient product available or negative wallet, click Purchase page again");
+
+                  echo "<script type='text/javascript'>alert('Insufficient funds or quantity to complete purchase.');</script>";
+                  header("Refresh:0");
+
               }
 
             }
