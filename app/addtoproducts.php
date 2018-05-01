@@ -69,8 +69,8 @@ if(!$_SESSION['email'])
         <h1 align="center">All Current Products</h1>
         <div class="table-responsive">
             <!--this is used for responsive display in mobile and other devices-->
-            <table class="table table-bordered table-hover table-striped" style="table-layout: fixed">
-                <thead>
+            <table class="table table-bordered table-hover table-striped">
+                <thead class="thead-dark">
 
                     <tr>
                         <th>Product Id</th>

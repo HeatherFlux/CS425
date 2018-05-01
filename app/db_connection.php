@@ -8,5 +8,5 @@ if (!$dbcon) {
 }
 // echo "Success: A proper connection to MySQL was made! The my_db database is great." . PHP_EOL;
 // echo "Host information: " . mysqli_get_host_info($dbcon) . PHP_EOL;
-mysqli_select_db($dbcon,"users");
+mysqli_select_db($dbcon,"customers");
 ?>
