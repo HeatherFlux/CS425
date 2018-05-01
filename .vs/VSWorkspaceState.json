@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\functions_luke"
+    "\\js",
+    "\\js\\tests",
+    "\\js\\tests\\vendor"
   ],
-  "SelectedNode": "\\app\\purchase.php",
+  "SelectedNode": "\\app\\TODO.md",
   "PreviewInSolutionExplorer": false
 }
