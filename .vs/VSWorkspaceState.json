@@ -2,15 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\build",
-    "\\dist",
-    "\\dist\\js",
-    "\\js",
-    "\\js\\dist",
-    "\\js\\src",
-    "\\js\\tests",
-    "\\js\\tests\\vendor"
+    "\\app\\functions_luke"
   ],
-  "SelectedNode": "\\app\\changesettings.php",
+  "SelectedNode": "\\app\\purchase.php",
   "PreviewInSolutionExplorer": false
 }

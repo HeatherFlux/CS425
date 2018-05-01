@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 if(!$_SESSION['email'])
@@ -90,7 +90,7 @@ if(!$_SESSION['email'])
             </thead>
             <tbody>
 
-          <?php
+                <?php
             include("db_connection.php");
 
             /*
@@ -100,6 +100,10 @@ if(!$_SESSION['email'])
               check for things like negative quantity etc etc.
             */
 
+            //testing: adding $100 to wallet
+            $wallet=$_SESSION['wallet'];
+            $wallet = $wallet + 100;
+
             //update wallet
             if (isset($_POST['quantity']))
             {
@@ -108,6 +112,7 @@ if(!$_SESSION['email'])
               // echo 'Quant:'.$quant;
               // echo ' Pid:'.$pid;
 
+              //testing: adding $100 to wallet
               $wallet=$_SESSION['wallet'];
               // get price and convert to int.
               $get_price_query = "select product_cost from product where product_id like '%".$pid."%'";
@@ -120,22 +125,32 @@ if(!$_SESSION['email'])
               $get_quantity_query = "select product_quantity from product where product_id like '%".$pid."%'";
               $product_quantity = mysqli_query($dbcon, $get_quantity_query);
               $row=mysqli_fetch_assoc($product_quantity);
-              // echo ' product quant:'.$row["product_quantity"];
+              //echo ' product quant:'.$row["product_quantity"];
               $product_quantity=$row["product_quantity"];
-
-              //update wallet
-              // echo ' wallet before:'.$wallet;
-              $wallet = $wallet - ($product_price * $quant); //update current wallet
-              // echo ' wallet after:'.$wallet;
-              $_SESSION['wallet'] = $_SESSION['wallet'] - ($product_price * $quant);
 
               // update quant
               // echo ' quant before:'.$product_quantity;
               $product_quantity = $product_quantity-$quant;
-              // echo ' quant after:'.$product_quantity;
-              $update_quantity_query = "UPDATE product SET product_quantity=$product_quantity WHERE product_id like '%".$pid."%'";
-              mysqli_query($dbcon, $update_quantity_query);
-              header("Refresh:0"); // refreshes page to update wallet in the navbar
+
+              //update wallet
+              // echo ' wallet before:'.$wallet;
+              $wallet = $wallet - ($product_price * $quant); //update current wallet
+
+              if($product_quantity >= 0 && $wallet >= 0)
+              {
+                  // echo ' quant after:'.$product_quantity;
+                  $update_quantity_query = "UPDATE product SET product_quantity=$product_quantity WHERE product_id like '%".$pid."%'";
+                  mysqli_query($dbcon, $update_quantity_query);
+
+                  // echo ' wallet after:'.$wallet;
+                  $_SESSION['wallet'] = $_SESSION['wallet'] - ($product_price * $quant);
+                  header("Refresh:0"); // refreshes page to update wallet in the navbar
+              }
+              else
+              {
+                  exit("Insufficient product available or negative wallet, click Purchase page again");
+              }
+
             }
 
             //Search product name
@@ -163,7 +178,7 @@ if(!$_SESSION['email'])
               $product_cost=$row[7];
               $product_description=$row[8];
               $product_image_link=$row[9];
-          ?>
+                ?>
 
           <tr>
             <!--here showing results in the table -->

@@ -3,7 +3,7 @@
 ###### Right click this file and click markdown preview
 
 - [x] Implement the purchasing function
-- [ ] If Statements in purchases for running out a product or money
+- [x] If Statements in purchases for running out a product or money
 - [ ] Implement the addtoproducts.php page and the delete function
 - [ ] Create the final schema
 - [ ] Add a bunch of random users and data
