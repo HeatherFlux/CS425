@@ -115,7 +115,7 @@ if(!$_SESSION['email'])
                     <td><?php echo $product_cost;  ?></td>
                     <td><?php echo $product_description;  ?></td>
                     <td><?php echo $product_image_link;  ?></td>
-                    <form>
+                    <form class="form-inline my-2 my-lg-0" name="input" method="post" action="deleteproduct.php">
                     <td><a href="delete.php?del=<?php echo $product_id ?>"><button class="btn btn-danger">Delete</button></a></td> <!--btn btn-danger is a bootstrap button to show danger-->
                     </form>
                 </tr><?php } ?>
