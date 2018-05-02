@@ -95,9 +95,22 @@ if(!$_SESSION['email'])
                   <label for="newadd" class="sr-only">New Address</label>
                   <input type="text" name="newadd" class="form-control" placeholder="Change Address"></p>
                 </div>
-
                   <button style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;" class="btn btn-lg btn-success btn-block" type="submit" value="change" name="change">Submit</button>
               </form>
+
+              <p></p>
+
+            <form name="input" autocomplete="off" method="post" action="changesettings.php" >
+            <form>
+              <h2>Change Account Balance</h2>
+              <div class="container">
+                <p>Add Funds
+                <label for="newadd" class="sr-only">funds</label>
+                <input type="text" name="funds" class="form-control" placeholder="Bitcoin"></p>
+              </div>
+              <button style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;" class="btn btn-lg btn-success btn-block" type="submit" value="change" name="change">Submit</button>
+            </form>
+
             </div>
           <div class="col-sm"></div>
         </div>
@@ -121,7 +134,26 @@ if(!$_SESSION['email'])
 
  <?php
  include("db_connection.php");//make connection here
- if(isset($_POST['change']))
+
+ if(isset($_POST['funds']))
+ {
+   $uid =$_SESSION['uid'];
+   $wallet=$_SESSION['wallet'];
+   $wallet = $wallet + $_POST['funds'];
+   $upw = "
+   UPDATE customer
+   SET wallet = $wallet
+   WHERE customer_id = $uid
+   ";
+   if(!mysqli_query($dbcon, $upw)) {
+     printf("Failed to update customer's funds on DB");
+     exit;
+   }
+   $_SESSION['wallet'] = $wallet;
+   //header("Refresh:0"); // refreshes page to update wallet in the navbar
+ }
+
+ if(isset($_POST['newpass']))
  {
    // FORM DATA
    $oldpass=$_POST['oldpass'];

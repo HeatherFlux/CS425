@@ -67,6 +67,10 @@ CREATE TABLE `warehouse` (
 FOREIGN KEY (`region_id`) REFERENCES `region`(`region_id`)
 );
 
+INSERT INTO warehouse(warehouse_name, region_id, description, address, manager_name, manager_email, manager_phone) VALUES("USA", 1, "'Murica", "Chicago", "Jake", "jake@statefarm.com", "773-202-LUNA");
+INSERT INTO warehouse(warehouse_name, region_id, description, address, manager_name, manager_email, manager_phone) VALUES("Britain", 2, "People that sound smart", "Scotland Yard", "Anne", "anne@teaparty.com", "875-294-2942");
+INSERT INTO warehouse(warehouse_name, region_id, description, address, manager_name, manager_email, manager_phone) VALUES("Canada", 3, "Free healthcare", "Chicago", "Quebec", "Moose", "leaf@aye.com", "284-248-2489");
+
 CREATE TABLE `warehouse_product`(
 `product_id` int unique,
 `product_stock` int not null,

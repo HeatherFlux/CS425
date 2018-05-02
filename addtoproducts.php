@@ -43,7 +43,7 @@ if(!$_SESSION['email'])
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="addtoproducts.php">Add</a>
-            </li>
+            </li> 
             <li class="nav-item">
               <a class="nav-link" href="changesettings.php">User Settings</a>
             </li>
@@ -113,12 +113,16 @@ if(!$_SESSION['email'])
                   <input type="text" name="product_image" class="form-control" placeholder="Product Image"></p>
                 </div>
 
-                  <button style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;" class="btn btn-lg btn-success btn-block" type="submit" value="change" name="change">Submit</button>
+                <button style="background:#4d0225; border:#4d0225; active: background:#4d0225; border:#4d0225;" class="btn btn-lg btn-success btn-block" type="submit" value="change" name="change">Submit</button>
               </form>
+
+              <p> </p>
             </div>
           <div class="col-sm"></div>
         </div>
       </div>
+
+
 </body>
 </html>
 

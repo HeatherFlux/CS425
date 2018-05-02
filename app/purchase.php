@@ -143,7 +143,10 @@ if(!$_SESSION['email'])
                   mysqli_query($dbcon, $update_quantity_query);
 
                   // echo ' wallet after:'.$wallet;
-                  $_SESSION['wallet'] = $_SESSION['wallet'] - ($product_price * $quant);
+                  $_SESSION['wallet'] = $wallet;
+                  $uid=$_SESSION['uid'];
+                  $update_wallet_query = "UPDATE customer SET wallet=$wallet WHERE customer_id like '%".$uid."%'";
+                  mysqli_query($dbcon, $update_wallet_query);
                   header("Refresh:0"); // refreshes page to update wallet in the navbar
               }
               else
