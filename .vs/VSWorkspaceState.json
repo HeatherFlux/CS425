@@ -1,11 +1,18 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app",
+    "\\build",
+    "\\dist",
+    "\\dist\\js",
+    "\\docs",
+    "\\docs\\4.0",
+    "\\docs\\4.0\\examples",
+    "\\docs\\4.0\\examples\\blog",
+    "\\docs\\4.0\\examples\\pricing",
+    "\\docs\\4.0\\examples\\product",
     "\\js",
-    "\\js\\tests",
-    "\\js\\tests\\vendor"
+    "\\js\\dist"
   ],
-  "SelectedNode": "\\app\\TODO.md",
+  "SelectedNode": "\\app\\addtoproducts.php",
   "PreviewInSolutionExplorer": false
 }
