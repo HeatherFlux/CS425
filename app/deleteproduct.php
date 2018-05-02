@@ -87,6 +87,9 @@ if(!$_SESSION['email'])
                     </tr>
                 </thead>                <?php
                 include("db_connection.php");
+
+                
+
                 $view_products_query="select * from product"; //select query for viewing users.
                 $run=mysqli_query($dbcon,$view_products_query);//here run the sql query.
                 while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.
@@ -116,7 +119,7 @@ if(!$_SESSION['email'])
                     <td><?php echo $product_description;  ?></td>
                     <td><?php echo $product_image_link;  ?></td>
                     <form class="form-inline my-2 my-lg-0" name="input" method="post" action="deleteproduct.php">
-                    <td><a href="delete.php?del=<?php echo $product_id ?>"><button class="btn btn-danger">Delete</button></a></td> <!--btn btn-danger is a bootstrap button to show danger-->
+                    <td><a href="delete.php?del=<?php echo $product_id ?>"><button class="btn btn-danger" name="delete">Delete</button></a></td> <!--btn btn-danger is a bootstrap button to show danger-->
                     </form>
                 </tr><?php } ?>
 

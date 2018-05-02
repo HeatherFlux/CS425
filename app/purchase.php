@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 if(!$_SESSION['email'])
@@ -91,7 +91,7 @@ if(!$_SESSION['email'])
             </thead>
             <tbody>
 
-          <?php
+                <?php
             include("db_connection.php");
 
             /*
@@ -99,7 +99,11 @@ if(!$_SESSION['email'])
               product id of what was bought, and then update the quantity
               number as well as the users wallet. Can you implement a
               check for things like negative quantity etc etc.
-            */
+             */
+
+            //testing: adding $100 to wallet
+            $wallet=$_SESSION['wallet'];
+            $wallet = $wallet + 100;
 
             //update wallets
             if (isset($_POST['quantity']))
@@ -179,19 +183,9 @@ if(!$_SESSION['email'])
               header("Refresh:0");
             }
 
-
-
-
-
-
-
-
-
-
-
             //Search product name
             if (isset($_POST['p_name']))
-            { 
+            {
                 $view_selected_search="
                 select *
                 from product AS t1
@@ -218,7 +212,7 @@ if(!$_SESSION['email'])
               $product_cost=$row[7];
               $product_description=$row[8];
               $product_image_link=$row[9];
-          ?>
+                ?>
 
           <tr>
             <!--here showing results in the table -->
