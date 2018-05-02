@@ -115,7 +115,9 @@ if(!$_SESSION['email'])
                     <td><?php echo $product_cost;  ?></td>
                     <td><?php echo $product_description;  ?></td>
                     <td><?php echo $product_image_link;  ?></td>
+                    <form>
                     <td><a href="delete.php?del=<?php echo $product_id ?>"><button class="btn btn-danger">Delete</button></a></td> <!--btn btn-danger is a bootstrap button to show danger-->
+                    </form>
                 </tr><?php } ?>
 
             </table>
