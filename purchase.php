@@ -106,7 +106,7 @@ if(!$_SESSION['email'])
             {
               $quant=$_POST['quantity'];
               $pid=$_POST['productid'];
-              $uid =$_SESSION['uid']; 
+              $uid =$_SESSION['uid'];
               $wallet=$_SESSION['wallet'];
 
               // get price and convert to int.
@@ -191,9 +191,13 @@ if(!$_SESSION['email'])
 
             //Search product name
             if (isset($_POST['p_name']))
-            {
-                //$view_selected_search="select * from product where product_name like '%".$search_product."%'";
-                $view_selected_search="select * from product where product_name like '%".$_POST['p_name']."%'";
+            { 
+                $view_selected_search="
+                select *
+                from product AS t1
+                LEFT JOIN category AS t2 ON t1.product_category = t2.category_id
+                where product_name like '%".$_POST['p_name']."%'
+                or category_name like '%".$_POST['p_name']."%'";
             	$run=mysqli_query($dbcon,$view_selected_search);
           	}
           	else
