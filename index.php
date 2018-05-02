@@ -90,10 +90,10 @@ if(isset($_POST['login']))
       $_SESSION['email']=$row[2];
       $_SESSION['phone_number']=$row[3];
       $_SESSION['address']=$row[4];
-      $_SESSION['wallet']=$row[5];
-      $_SESSION['aName']=$row[6];
-      $_SESSION['aPass']=$row[7];
-      $_SESSION['pCount']=$row[8];
+      $_SESSION['aName']=$row[5];
+      $_SESSION['aPass']=$row[6];
+      $_SESSION['pCount']=$row[7];
+      $_SESSION['wallet']=$row[8];
       $_SESSION['cRegion']=$row[9];
     }
 

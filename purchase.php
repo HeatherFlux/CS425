@@ -52,12 +52,13 @@ if(!$_SESSION['email'])
           </ul>
           <form class="form-inline my-2 my-lg-0" name="input" method="post" action="purchase.php">
             <label for="p_name" class="sr-only">Search</label>
-            <input class="form-control mr-sm-2" type="text" name="p_name" placeholder="Search Product Name" aria-label="Search">
+            <input class="form-control mr-sm-2" type="text" name="p_name" placeholder="Search Product Name/Category" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
         </div>
       </nav>
     </div>
+
     <div class="container">
       <!--  Jumbotron is the header that you see, you can change its color-->
       <div style="background:#02474d; color: #EEEEEE; !important; border-radius: 0px 0px 5px 5px;" class="jumbotron">
@@ -100,43 +101,93 @@ if(!$_SESSION['email'])
               check for things like negative quantity etc etc.
             */
 
-            //update wallet
+            //update wallets
             if (isset($_POST['quantity']))
             {
               $quant=$_POST['quantity'];
               $pid=$_POST['productid'];
-              // echo 'Quant:'.$quant;
-              // echo ' Pid:'.$pid;
-
+              $uid =$_SESSION['uid']; 
               $wallet=$_SESSION['wallet'];
+
               // get price and convert to int.
               $get_price_query = "select product_cost from product where product_id like '%".$pid."%'";
               $product_price = mysqli_query($dbcon, $get_price_query);//gets result
               $row=mysqli_fetch_assoc($product_price); //converts result to int array
-              // echo ' product cost:'.$row["product_cost"]; // pulls int from array
               $product_price=$row["product_cost"];
 
-              // get quant and convert
+              // get quantity and convert to int
               $get_quantity_query = "select product_quantity from product where product_id like '%".$pid."%'";
               $product_quantity = mysqli_query($dbcon, $get_quantity_query);
               $row=mysqli_fetch_assoc($product_quantity);
-              // echo ' product quant:'.$row["product_quantity"];
               $product_quantity=$row["product_quantity"];
 
-              //update wallet
-              // echo ' wallet before:'.$wallet;
-              $wallet = $wallet - ($product_price * $quant); //update current wallet
-              // echo ' wallet after:'.$wallet;
-              $_SESSION['wallet'] = $_SESSION['wallet'] - ($product_price * $quant);
+              // get owner and convert to int
+              $get_owner_query = "select owner from product where product_id like '%".$pid."%'";
+              $seller = mysqli_query($dbcon, $get_owner_query);
+              $row = mysqli_fetch_assoc($seller);
+              $seller=$row["owner"];
 
-              // update quant
-              // echo ' quant before:'.$product_quantity;
-              $product_quantity = $product_quantity-$quant;
-              // echo ' quant after:'.$product_quantity;
-              $update_quantity_query = "UPDATE product SET product_quantity=$product_quantity WHERE product_id like '%".$pid."%'";
-              mysqli_query($dbcon, $update_quantity_query);
-              header("Refresh:0"); // refreshes page to update wallet in the navbar
+              // update quantity if transaction will take place
+              if($product_quantity >= $quant) {
+                if($wallet >= $product_price*$quant) {
+                  $product_quantity = $product_quantity-$quant;
+                  $update_quantity_query = "UPDATE product SET product_quantity=$product_quantity WHERE product_id like '%".$pid."%'";
+                  mysqli_query($dbcon, $update_quantity_query);
+                }
+                else {
+                  echo "Not enough funds";
+                  exit;
+                }
+              }
+              else {
+                echo "Not enough in stock";
+                exit;
+              }
+
+              // update customer's wallet
+              printf("CUST WALLET: %d\n", $wallet);
+              $wallet = $wallet - ($product_price * $quant);
+              $upw = "
+              UPDATE customer
+              SET wallet = $wallet
+              WHERE customer_id = $uid
+              ";
+              if(!mysqli_query($dbcon, $upw)) {
+                printf("Failed to update customer's funds on DB");
+                exit;
+              }
+              $_SESSION['wallet'] = $wallet;
+
+              // find seller
+              $seller_query = "SELECT wallet FROM customer WHERE customer_id = $seller";
+              $seller_wallet = mysqli_query($dbcon, $seller_query);
+              if(!$seller_wallet) {
+                echo "Yup";
+                exit;
+              }
+              $row = mysqli_fetch_assoc($seller_wallet);
+              $seller_wallet = $row["wallet"];
+
+              // update seller's wallet
+              $seller_wallet = $seller_wallet + ($product_price * $quant);
+              $seller_query = "UPDATE customer SET wallet=$seller_wallet WHERE customer_id = $seller";
+              mysqli_query($dbcon, $seller_query);
+              if($seller == $uid)
+                $_SESSION['wallet'] = $seller_wallet;
+
+              // refreshes page to update wallet in the navbar
+              header("Refresh:0");
             }
+
+
+
+
+
+
+
+
+
+
 
             //Search product name
             if (isset($_POST['p_name']))
